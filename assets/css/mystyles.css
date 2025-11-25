@@ -1,72 +1,179 @@
-/* --- 1. 全站字體設定 --- */
-/* 中文 → 思源黑體；英文保持原本字體 */
-body, h1, h2, h3, h4, h5, h6, .subheading {
-    font-family: "Noto Sans TC", sans-serif;
-    color: #ffffff; /* 全站字體白色 */
+/* ----------------------------------
+   1. 全站字體 & 基本顏色
+---------------------------------- */
+
+body,
+h1, h2, h3, h4, h5, h6,
+.subheading {
+    font-family: "Noto Sans TC", "Muli", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #ffffff;
 }
 
-/* H2 保留大寫 */
+body {
+    background-color: #050510;   /* 深色底 */
+}
+
+/* h2 標題維持大寫，看起來比較像段落標題 */
 h2 {
     text-transform: uppercase;
+    letter-spacing: 0.12em;
 }
 
-/* --- 2. 主題色設定（你給的兩色） --- */
+/* 強化主色 / 重點色（深藍紫 + 紫紅） */
 :root {
-    /* 主色 (深藍紫 #4B3FA3) */
-    --bs-primary-rgb: 75, 63, 163;
-
-    /* 連結顏色使用亮紫 #974EC3 */
-    --bs-link-color: rgb(255, 255, 255);
-    --bs-link-hover-color: rgb(255, 255, 255);
+    --bs-primary-rgb: 50, 38, 140;              /* 側邊欄主色 */
+    --bs-link-color: #974EC3;
+    --bs-link-hover-color: #c28cff;
 }
 
-/* icon hover → 亮紫 */
+/* 文字上用到 .text-primary 的地方 → 紫紅 */
+.text-primary {
+    color: #974EC3 !important;
+}
+
+/* ----------------------------------
+   2. 側邊欄（Navbar）美化
+---------------------------------- */
+
+/* 左側整根 navbar 做漸層 */
+#sideNav {
+    background: linear-gradient(180deg, #32268C 0%, #1E164F 55%, #050510 100%) !important;
+}
+
+/* 大頭貼樣式 */
+.img-profile {
+    max-width: 14rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(151, 78, 195, 0.95);          /* 紫紅描邊 */
+    box-shadow:
+        0 0 0 4px rgba(151, 78, 195, 0.35),
+        0 18px 40px rgba(0, 0, 0, 0.75);
+}
+
+/* 左側小尺寸名字 */
+#sideNav .navbar-brand .d-block.d-lg-none {
+    font-size: 1.1rem;
+}
+
+/* ----------------------------------
+   3. 內容區塊（Resume Sections）
+---------------------------------- */
+
+.resume-section {
+    padding: 5rem 0;
+}
+
+/* 內層做成有質感的卡片感 + 一點紫色光暈 */
+.resume-section-content {
+    background: radial-gradient(circle at top left,
+                rgba(151, 78, 195, 0.22),
+                rgba(5, 5, 16, 0.96));
+    border-radius: 24px;
+    padding: 3rem 3rem;
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+}
+
+/* 偶數區塊改另邊打光，讓版面有變化 */
+.resume-section:nth-of-type(even) .resume-section-content {
+    background: radial-gradient(circle at top right,
+                rgba(75, 63, 163, 0.22),
+                rgba(5, 5, 16, 0.96));
+}
+
+/* 大標題 Patrick + 中文名 */
+h1.mb-0 {
+    font-size: 3rem;
+    letter-spacing: 0.08em;
+}
+
+/* 副標文字（地址 + 電話 + mail） */
+.subheading {
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Gmail 小寫 + 去底線（你要求的） */
+.subheading a {
+    text-transform: lowercase;
+    text-decoration: none;
+    border-bottom: none;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.subheading a:hover {
+    color: #974EC3;
+}
+
+/* lead 敘述（Logo 設計｜平面設計） */
+.lead {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+/* 區塊內的列表（Skills 那些） */
+.resume-section-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.resume-section-content ul li {
+    margin-bottom: 0.35rem;
+    position: relative;
+    padding-left: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.resume-section-content ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #974EC3; /* 子彈點用紫紅 */
+}
+
+/* ----------------------------------
+   4. 社群 icon 美化
+---------------------------------- */
+
+.social-icons .social-icon {
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.2rem;
+    line-height: 3rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    background-color: transparent;
+}
+
 .social-icons .social-icon:hover {
     background-color: #974EC3;
+    border-color: #974EC3;
+    transform: translateY(-2px) scale(1.03);
 }
 
-/* --- 3. 背景區塊設定 --- */
-/* 深藍紫背景 + 高質感感覺 */
-.resume-section {
-    background-color: #000000; /* 深藍紫 */
-    color: #ffffff;
-}
+/* ----------------------------------
+   5. RWD 小調整（手機版不要太擠）
+---------------------------------- */
 
-/* 想要更帥可以開啟 (漸層版) */
-/*
-.resume-section {
-    background: linear-gradient(
-        135deg,
-        #4B3FA3 0%,
-        #974EC3 100%
-    );
-}
-*/
+@media (max-width: 992px) {
+    .resume-section-content {
+        padding: 2.25rem 1.75rem;
+        border-radius: 18px;
+    }
 
-/* --- 全站字體設定（默認白字） --- */
-body, h1, h2, h3, h4, h5, h6, p, li, span, .subheading {
-    font-family: "Noto Sans TC", sans-serif;
-    color: #ffffff;
-}
+    h1.mb-0 {
+        font-size: 2.4rem;
+    }
 
-/* 深色背景的標題保持白色 */
-h2 {
-    color: #ffffff;
-    text-transform: uppercase;
-}
-
-/* --- 白底區塊的字變深藍紫 (#4B3FA3) --- */
-/* 你自己的白底區塊請加 .white-section */
-
-.white-section,
-.white-section h1,
-.white-section h2,
-.white-section h3,
-.white-section h4,
-.white-section h5,
-.white-section h6,
-.white-section p,
-.white-section li,
-.white-section .subheading {
-    color: #ffffff !important;
+    .subheading {
+        letter-spacing: 0.08em;
+    }
 }
