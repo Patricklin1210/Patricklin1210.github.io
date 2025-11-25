@@ -177,3 +177,15 @@ h1.mb-0 {
         letter-spacing: 0.08em;
     }
 }
+/* ---- 強制 Email 小寫 & 變白色 & 去底線 ---- */
+.resume-section a {
+    text-transform: lowercase !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+/* hover 時不要變藍色 */
+.resume-section a:hover {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
